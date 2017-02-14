@@ -27,6 +27,8 @@ struct ExtractionTurn
     const bool has_traffic_light;
     double weight;
     double duration;
+    bool source_local_access_only;
+    bool target_local_access_only;
 };
 }
 }

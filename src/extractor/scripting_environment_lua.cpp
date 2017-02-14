@@ -373,7 +373,11 @@ void Sol2ScriptingEnvironment::InitContext(LuaScriptingContext &context)
                                                "weight",
                                                &ExtractionTurn::weight,
                                                "duration",
-                                               &ExtractionTurn::duration);
+                                               &ExtractionTurn::duration,
+                                               "source_local_access_only",
+                                               &ExtractionTurn::source_local_access_only,
+                                               "target_local_access_only",
+                                               &ExtractionTurn::target_local_access_only);
 
     // Keep in mind .location is undefined since we're not using libosmium's location cache
     context.state.new_usertype<osmium::NodeRef>("NodeRef", "id", &osmium::NodeRef::ref);
