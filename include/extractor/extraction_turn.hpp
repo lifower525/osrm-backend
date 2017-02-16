@@ -17,7 +17,8 @@ struct ExtractionTurn
     ExtractionTurn(const guidance::ConnectedRoad &turn, bool has_traffic_light)
         : angle(180. - turn.angle), turn_type(turn.instruction.type),
           direction_modifier(turn.instruction.direction_modifier),
-          has_traffic_light(has_traffic_light), weight(0.), duration(0.)
+          has_traffic_light(has_traffic_light), weight(0.), duration(0.),
+          source_local_access_only(false), target_local_access_only(false)
     {
     }
 
