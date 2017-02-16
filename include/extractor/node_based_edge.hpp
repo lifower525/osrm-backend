@@ -77,8 +77,8 @@ struct NodeBasedEdgeWithOSM : NodeBasedEdge
 inline NodeBasedEdge::NodeBasedEdge()
     : source(SPECIAL_NODEID), target(SPECIAL_NODEID), name_id(0), weight(0), duration(0),
       forward(false), backward(false), roundabout(false), circular(false), startpoint(true),
-      local_access_only(false), is_split(false),
-      travel_mode(TRAVEL_MODE_INACCESSIBLE), lane_description_id(INVALID_LANE_DESCRIPTIONID)
+      local_access_only(false), is_split(false), travel_mode(TRAVEL_MODE_INACCESSIBLE),
+      lane_description_id(INVALID_LANE_DESCRIPTIONID)
 {
 }
 

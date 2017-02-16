@@ -392,8 +392,8 @@ function turn_function (turn)
     end
     if properties.weight_name == 'routability' then
         -- penalize turns from non-local access only segments onto local access only tags
-        if (turn.source_local_access_only ~= true) and (turn.target_local_access_only == true) then
-            turn.weight = turn.weight * 10
+        if not turn.source_local_access_only and turn.target_local_access_only then
+            turn.weight = turn.weight + 3000
         end
     end
   end
