@@ -177,20 +177,32 @@ function Handlers.handle_hov(way,result,data,profile)
     return
   end
 
-  -- in this case we will use penalties instead of filtering out
+  local hov = way:get_value_by_key("hov")
+    if "designated" == hov then
+      result.forward_local_access_only = true
+      result.backward_local_access_only = true
+  end
+
+  data.hov_lanes_forward, data.hov_lanes_backward = Tags.get_forward_backward_by_key(way,data,'hov:lanes')
+  local all_hov_forward = Handlers.has_all_designated_hov_lanes(data.hov_lanes_forward)
+  local all_hov_backward = Handlers.has_all_designated_hov_lanes(data.hov_lanes_backward)
+
+  -- in this case we will use turn penalties instead of filtering out
   if properties.weight_name == 'routability' then
+    if (all_hov_forward) then
+      result.forward_local_access_only = true
+    end
+    if (all_hov_backward) then
+      result.backward_local_access_only = true
+    end
     return
   end
 
-  -- check if all lanes are hov only
-  data.hov_lanes_forward, data.hov_lanes_backward = Tags.get_forward_backward_by_key(way,data,'hov:lanes')
-  local inaccessible_forward = Handlers.has_all_designated_hov_lanes(data.hov_lanes_forward)
-  local inaccessible_backward = Handlers.has_all_designated_hov_lanes(data.hov_lanes_backward)
-
-  if inaccessible_forward then
+  -- filter out ways where all lanes are hov only
+  if all_hov_forward then
     result.forward_mode = mode.inaccessible
   end
-  if inaccessible_backward then
+  if all_hov_backward then
     result.backward_mode = mode.inaccessible
   end
 end
@@ -281,24 +293,6 @@ end
 function Handlers.handle_penalties(way,result,data,profile)
   -- heavily penalize a way tagged with all HOV lanes
   -- in order to only route over them if there is no other option
-  local forward_hov_penalty = 1.0
-  local backward_hov_penalty = 1.0
-  if profile.avoid.hov_lanes then
-    local hov = way:get_value_by_key("hov")
-    if "designated" == hov then
-      forward_hov_penalty = 0.1
-      backward_hov_penalty = 0.1
-    else
-      data.hov_lanes_forward, data.hov_lanes_backward = Tags.get_forward_backward_by_key(way,data,'hov:lanes')
-      if Handlers.has_all_designated_hov_lanes(data.hov_lanes_forward) then
-          forward_hov_penalty = 0.1
-      end
-      if Handlers.has_all_designated_hov_lanes(data.hov_lanes_backward) then
-          backward_hov_penalty = 0.1
-      end
-    end
-  end
-
   local service_penalty = 1.0
   local service = way:get_value_by_key("service")
   if service and profile.service_penalties[service] then
@@ -338,8 +332,8 @@ function Handlers.handle_penalties(way,result,data,profile)
     sideroad_penalty = profile.side_road_multiplier
   end
 
-  local forward_penalty = math.min(service_penalty, width_penalty, alternating_penalty, sideroad_penalty, forward_hov_penalty)
-  local backward_penalty = math.min(service_penalty, width_penalty, alternating_penalty, sideroad_penalty, backward_hov_penalty)
+  local forward_penalty = math.min(service_penalty, width_penalty, alternating_penalty, sideroad_penalty)
+  local backward_penalty = math.min(service_penalty, width_penalty, alternating_penalty, sideroad_penalty)
 
   if properties.weight_name == 'routability' then
     if result.forward_speed > 0 then

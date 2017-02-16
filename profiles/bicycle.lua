@@ -65,6 +65,8 @@ local profile = {
    	'delivery'
   },
 
+  local_access_tag_list = Set { },
+
   access_tags_hierarchy = Sequence {
   	'bicycle',
   	'vehicle',
@@ -520,5 +522,11 @@ function turn_function(turn)
 
   if turn.has_traffic_light then
      turn.duration = turn.duration + profile.traffic_light_penalty
+  end
+  if properties.weight_name == 'cyclability' then
+      -- penalize turns from non-local access only segments onto local access only tags
+      if not turn.source_local_access_only and turn.target_local_access_only then
+          turn.weight = turn.weight + 3000
+      end
   end
 end

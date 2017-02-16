@@ -334,7 +334,7 @@ function way_function(way, result)
     -- handle service road restrictions
     'handle_service',
 
-    -- check high occupancy vehicle restrictions
+    -- handle hov
     'handle_hov',
 
     -- compute speed taking into account way type, maxspeed tags, etc.

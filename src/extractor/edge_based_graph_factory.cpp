@@ -548,7 +548,6 @@ void EdgeBasedGraphFactory::GenerateEdgeExpandedEdges(
                         boost::numeric_cast<EdgeWeight>(edge_data1.weight + weight_penalty);
                     auto duration =
                         boost::numeric_cast<EdgeWeight>(edge_data1.duration + duration_penalty);
-
                     m_edge_based_edge_list.emplace_back(edge_data1.edge_id,
                                                         edge_data2.edge_id,
                                                         turn_id,
