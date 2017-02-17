@@ -22,6 +22,7 @@ class MockMLP final : public MultiLevelPartition
     CellID GetCell(LevelID level, NodeID node) const { return levels[level - 1][node]; };
 
     LevelID GetHighestDifferentLevel(NodeID, NodeID) const { return 3; };
+    LevelID GetQueryLevel(NodeID, NodeID, NodeID) const { return 3; };
 
     std::size_t GetNumberOfLevels() const { return levels.size() + 1; }
 
