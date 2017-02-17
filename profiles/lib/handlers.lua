@@ -179,8 +179,8 @@ function Handlers.handle_hov(way,result,data,profile)
 
   local hov = way:get_value_by_key("hov")
     if "designated" == hov then
-      result.forward_local_access_only = true
-      result.backward_local_access_only = true
+      result.forward_restricted = true
+      result.backward_restricted = true
   end
 
   data.hov_lanes_forward, data.hov_lanes_backward = Tags.get_forward_backward_by_key(way,data,'hov:lanes')
@@ -190,10 +190,10 @@ function Handlers.handle_hov(way,result,data,profile)
   -- in this case we will use turn penalties instead of filtering out
   if properties.weight_name == 'routability' then
     if (all_hov_forward) then
-      result.forward_local_access_only = true
+      result.forward_restricted = true
     end
     if (all_hov_backward) then
-      result.backward_local_access_only = true
+      result.backward_restricted = true
     end
     return
   end
@@ -225,11 +225,11 @@ function Handlers.handle_access(way,result,data,profile)
   end
 
   if profile.local_access_tag_list[data.forward_access] then
-      result.forward_local_access_only = true
+      result.forward_restricted = true
   end
 
   if profile.local_access_tag_list[data.backward_access] then
-      result.backward_local_access_only = true
+      result.backward_restricted = true
   end
 end
 

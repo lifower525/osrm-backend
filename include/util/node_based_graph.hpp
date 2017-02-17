@@ -33,12 +33,12 @@ struct NodeBasedEdgeData
                       bool roundabout,
                       bool circular,
                       bool startpoint,
-                      bool local_access_only,
+                      bool restricted,
                       extractor::TravelMode travel_mode,
                       const LaneDescriptionID lane_description_id)
         : weight(weight), duration(duration), edge_id(edge_id), name_id(name_id),
           reversed(reversed), roundabout(roundabout), circular(circular), startpoint(startpoint),
-          local_access_only(local_access_only), travel_mode(travel_mode),
+          restricted(restricted), travel_mode(travel_mode),
           lane_description_id(lane_description_id)
     {
     }
@@ -51,7 +51,7 @@ struct NodeBasedEdgeData
     bool roundabout : 1;
     bool circular : 1;
     bool startpoint : 1;
-    bool local_access_only : 1;
+    bool restricted : 1;
     extractor::TravelMode travel_mode : 4;
     LaneDescriptionID lane_description_id;
     extractor::guidance::RoadClassification road_classification;
@@ -62,7 +62,7 @@ struct NodeBasedEdgeData
                (circular == other.circular) && (startpoint == other.startpoint) &&
                (travel_mode == other.travel_mode) &&
                (road_classification == other.road_classification) &&
-               (local_access_only == other.local_access_only);
+               (restricted == other.restricted);
     }
 
     bool CanCombineWith(const NodeBasedEdgeData &other) const
@@ -91,7 +91,7 @@ NodeBasedDynamicGraphFromEdges(NodeID number_of_nodes,
             output_edge.data.name_id = input_edge.name_id;
             output_edge.data.travel_mode = input_edge.travel_mode;
             output_edge.data.startpoint = input_edge.startpoint;
-            output_edge.data.local_access_only = input_edge.local_access_only;
+            output_edge.data.restricted = input_edge.restricted;
             output_edge.data.road_classification = input_edge.road_classification;
             output_edge.data.lane_description_id = input_edge.lane_description_id;
 

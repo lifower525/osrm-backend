@@ -18,7 +18,7 @@ struct ExtractionTurn
         : angle(180. - turn.angle), turn_type(turn.instruction.type),
           direction_modifier(turn.instruction.direction_modifier),
           has_traffic_light(has_traffic_light), weight(0.), duration(0.),
-          source_local_access_only(false), target_local_access_only(false)
+          source_restricted(false), target_restricted(false)
     {
     }
 
@@ -28,8 +28,8 @@ struct ExtractionTurn
     const bool has_traffic_light;
     double weight;
     double duration;
-    bool source_local_access_only;
-    bool target_local_access_only;
+    bool source_restricted;
+    bool target_restricted;
 };
 }
 }
