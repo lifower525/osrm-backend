@@ -34,6 +34,9 @@ local profile = {
   speed_reduction            = 0.8,
   traffic_light_penalty      = 2,
   u_turn_penalty             = 20,
+  local_access_penalty       = 3000,
+  -- Note^: abstract value but in seconds correlates approximately to 50 min
+  -- meaning that a route through a local access way is > 50 min faster than around
 
   -- Note: this biases right-side driving.
   -- Should be inverted for left-driving countries.
@@ -361,7 +364,6 @@ function way_function(way, result)
   Handlers.run(handlers,way,result,data,profile)
 end
 
--- Called during edge-based-graph creation
 function turn_function (turn)
   -- Use a sigmoid function to return a penalty that maxes out at turn_penalty
   -- over the space of 0-180 degrees.  Values here were chosen by fitting
@@ -393,7 +395,7 @@ function turn_function (turn)
     if properties.weight_name == 'routability' then
         -- penalize turns from non-local access only segments onto local access only tags
         if not turn.source_local_access_only and turn.target_local_access_only then
-            turn.weight = turn.weight + 3000
+            turn.weight = turn.weight + profile.local_access_penalty
         end
     end
   end

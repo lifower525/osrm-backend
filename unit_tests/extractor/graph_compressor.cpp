@@ -1,5 +1,5 @@
-#include "extractor/graph_compressor.hpp"
 #include "extractor/compressed_edge_container.hpp"
+#include "extractor/graph_compressor.hpp"
 #include "extractor/restriction_map.hpp"
 #include "util/node_based_graph.hpp"
 #include "util/typedefs.hpp"
@@ -22,7 +22,8 @@ namespace
 // creates a default edge of unit weight
 inline InputEdge MakeUnitEdge(const NodeID from, const NodeID to)
 {
-    // src, tgt, dist, edge_id, name_id, fwd, bkwd, roundabout, circular, startpoint, local access, split edge, travel_mode
+    // src, tgt, dist, edge_id, name_id, fwd, bkwd, roundabout, circular, startpoint, local access,
+    // split edge, travel_mode
     return {from,
             to,
             1,

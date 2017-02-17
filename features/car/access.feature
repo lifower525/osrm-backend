@@ -183,7 +183,7 @@ Feature: Car - Restricted access
     Scenario: Car - designated HOV ways are rated low
         Then routability should be
             | highway | hov        | bothw | forw_rate  | backw_rate  |
-            | primary | designated | x     | 2          | 2           |
+            | primary | designated | x     | 18         | 18          |
             | primary | yes        | x     | 18         | 18          |
             | primary | no         | x     | 18         | 18          |
 
@@ -194,7 +194,7 @@ Feature: Car - Restricted access
     Scenario: Car - I-66 use HOV-only roads with heavy penalty
         Then routability should be
             | highway  | hov         | hov:lanes                          | lanes | access     | oneway | forw | backw | forw_rate  |
-            | motorway | designated  | designated\|designated\|designated | 3     | hov        | yes    | x    |       | 3          |
+            | motorway | designated  | designated\|designated\|designated | 3     | hov        | yes    | x    |       | 25         |
             | motorway | lane        |                                    | 3     | designated | yes    | x    |       | 25         |
 
     @hov
