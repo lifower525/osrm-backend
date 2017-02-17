@@ -65,7 +65,7 @@ local profile = {
    	'delivery'
   },
 
-  local_access_tag_list = Set { },
+  restricted_access_tag_list = Set { },
 
   access_tags_hierarchy = Sequence {
   	'bicycle',

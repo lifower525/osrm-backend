@@ -224,11 +224,11 @@ function Handlers.handle_access(way,result,data,profile)
     return false
   end
 
-  if profile.local_access_tag_list[data.forward_access] then
+  if profile.restricted_access_tag_list[data.forward_access] then
       result.forward_restricted = true
   end
 
-  if profile.local_access_tag_list[data.backward_access] then
+  if profile.restricted_access_tag_list[data.backward_access] then
       result.backward_restricted = true
   end
 end

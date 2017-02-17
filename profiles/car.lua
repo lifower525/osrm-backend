@@ -77,7 +77,7 @@ local profile = {
     'psv'
   },
 
-  local_access_tag_list = Set {
+  restricted_access_tag_list = Set {
     'private',
     'delivery',
     'destination'
