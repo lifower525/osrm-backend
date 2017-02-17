@@ -38,8 +38,7 @@ struct NodeBasedEdgeData
                       const LaneDescriptionID lane_description_id)
         : weight(weight), duration(duration), edge_id(edge_id), name_id(name_id),
           reversed(reversed), roundabout(roundabout), circular(circular), startpoint(startpoint),
-          restricted(restricted), travel_mode(travel_mode),
-          lane_description_id(lane_description_id)
+          restricted(restricted), travel_mode(travel_mode), lane_description_id(lane_description_id)
     {
     }
 

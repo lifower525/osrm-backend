@@ -43,7 +43,7 @@ struct NodeBasedEdge
     std::uint8_t roundabout : 1;                      // 1
     std::uint8_t circular : 1;                        // 1
     std::uint8_t startpoint : 1;                      // 1
-    std::uint8_t restricted : 1;               // 1
+    std::uint8_t restricted : 1;                      // 1
     std::uint8_t is_split : 1;                        // 1
     TravelMode travel_mode : 4;                       // 4
     LaneDescriptionID lane_description_id;            // 16 2
@@ -99,9 +99,8 @@ inline NodeBasedEdge::NodeBasedEdge(NodeID source,
                                     guidance::RoadClassification road_classification)
     : source(source), target(target), name_id(name_id), weight(weight), duration(duration),
       forward(forward), backward(backward), roundabout(roundabout), circular(circular),
-      startpoint(startpoint), restricted(restricted), is_split(is_split),
-      travel_mode(travel_mode), lane_description_id(lane_description_id),
-      road_classification(std::move(road_classification))
+      startpoint(startpoint), restricted(restricted), is_split(is_split), travel_mode(travel_mode),
+      lane_description_id(lane_description_id), road_classification(std::move(road_classification))
 {
 }
 
